@@ -1,14 +1,56 @@
 .button-buy {
-    border-radius: 6px;
-    background: #D9D9D9;
-    width: 196px;
-    font-style: italic;
-    font-weight: 700;
-    line-height: 121.071%;
-    height: 33.532px;
-    cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  min-width: 200px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .button-buy:hover {
-    box-shadow: 0 0 4px rgb(255, 255, 255);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+  background: #f0f0f0;
+}
+
+.button-buy:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.button-buy:active {
+  transform: translateY(0);
+}
+
+.button-text {
+  font-style: italic;
+}
+
+.button-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.button-buy:hover .button-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .button-buy {
+    min-width: 180px;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+  }
 }

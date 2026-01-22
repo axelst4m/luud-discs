@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './HomePage.css';
 import Header from '../components/Header/Header';
 import Packshot from '../components/Packshot/Packshot';
@@ -6,21 +6,22 @@ import ButtonBuy from '../components/Button/ButtonBuy';
 import LogoLuud from '../components/LogoLuud/LogoLuud';
 import AboutUs from '../components/AboutUs/AboutUs';
 import ListenToUs from '../components/ListenToUs/ListenToUs';
-
-// import Gallery from '../components/Gallery/Gallery';
+import ContactUs from '../components/ContactUs/ContactUs';
 
 const HomePage = () => {
   return (
-    <div className="home-container"> 
+    <main className="home-container">
       <Header />
       <Packshot />
       <ButtonBuy />
       <LogoLuud />
       <AboutUs />
-      <h1>Listen To Us</h1>
-      <ListenToUs />
-      {/* Ajoute d'autres composants ici */}
-    </div>
+      <section aria-labelledby="listen-heading">
+        <h2 id="listen-heading" className="section-title">Listen To Us</h2>
+        <ListenToUs />
+      </section>
+      <ContactUs />
+    </main>
   );
 };
 
