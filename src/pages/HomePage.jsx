@@ -6,6 +6,7 @@ import LogoLuud from '../components/LogoLuud/LogoLuud';
 import AboutUs from '../components/AboutUs/AboutUs';
 import ListenToUs from '../components/ListenToUs/ListenToUs';
 import ContactUs from '../components/ContactUs/ContactUs';
+import AudioPlayer from '../components/AudioPlayer/AudioPlayer';
 
 const HomePage = () => {
   return (
@@ -20,6 +21,7 @@ const HomePage = () => {
         <ListenToUs />
       </section>
       <ContactUs />
+      <AudioPlayer />
     </main>
   );
 };
