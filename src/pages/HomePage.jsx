@@ -1,4 +1,3 @@
-
 import './HomePage.css';
 import Header from '../components/Header/Header';
 import Packshot from '../components/Packshot/Packshot';
@@ -16,8 +15,8 @@ const HomePage = () => {
       <ButtonBuy />
       <LogoLuud />
       <AboutUs />
-      <section aria-labelledby="listen-heading">
-        <h2 id="listen-heading" className="section-title">Listen To Us</h2>
+      <section className="releases-section" aria-labelledby="listen-heading">
+        <h2 id="listen-heading" className="section-title">ls ./releases</h2>
         <ListenToUs />
       </section>
       <ContactUs />

@@ -1,3 +1,43 @@
+/* ============================================
+   LÜÜD DISCS - Terminal Theme
+   Palette: Dracula-inspired
+   ============================================ */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@400;600;700&display=swap');
+
+/* CSS Variables - Dracula Palette */
+:root {
+  /* Background */
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #1a1a2e;
+  --bg-terminal: #16161e;
+
+  /* Text */
+  --text-primary: #f8f8f2;
+  --text-secondary: #6272a4;
+  --text-muted: #44475a;
+
+  /* Accent Colors */
+  --cyan: #8be9fd;
+  --green: #50fa7b;
+  --orange: #ffb86c;
+  --pink: #ff79c6;
+  --purple: #bd93f9;
+  --red: #ff5555;
+  --yellow: #f1fa8c;
+
+  /* Effects */
+  --glow-cyan: 0 0 10px rgba(139, 233, 253, 0.5), 0 0 20px rgba(139, 233, 253, 0.3);
+  --glow-green: 0 0 10px rgba(80, 250, 123, 0.5), 0 0 20px rgba(80, 250, 123, 0.3);
+  --glow-pink: 0 0 10px rgba(255, 121, 198, 0.5), 0 0 20px rgba(255, 121, 198, 0.3);
+  --glow-purple: 0 0 10px rgba(189, 147, 249, 0.5), 0 0 20px rgba(189, 147, 249, 0.3);
+
+  /* Fonts */
+  --font-mono: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 /* Base styles */
 *,
 *::before,
@@ -5,61 +45,233 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background-color: #000;
-  color: #fff;
-  line-height: 1.5;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* CRT Scanlines Effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* CRT Flicker Animation */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.97; }
+  50% { opacity: 1; }
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: 700;
-  line-height: 1.2;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
+/* Terminal-style section titles */
 .section-title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 0.02em;
+  font-family: var(--font-mono);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 500;
+  text-align: left;
+  letter-spacing: 0.05em;
+  color: var(--green);
+  text-shadow: var(--glow-green);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title::before {
+  content: '>';
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Terminal prompt style */
+.terminal-prompt {
+  font-family: var(--font-mono);
+  color: var(--purple);
+}
+
+.terminal-prompt::before {
+  content: '$ ';
+  color: var(--green);
 }
 
 /* Links */
 a {
   text-decoration: none;
-  color: #fff;
-  transition: text-shadow 0.2s ease, opacity 0.2s ease;
+  color: var(--cyan);
+  transition: all 0.2s ease;
 }
 
 a:hover,
 a:focus-visible {
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  color: var(--pink);
+  text-shadow: var(--glow-pink);
 }
 
 a:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: 1px solid var(--pink);
+  outline-offset: 3px;
 }
 
 /* Focus visible for accessibility */
 :focus-visible {
-  outline: 2px solid #fff;
+  outline: 1px solid var(--cyan);
   outline-offset: 2px;
 }
 
 /* Buttons reset */
 button {
-  font-family: inherit;
+  font-family: var(--font-mono);
   cursor: pointer;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: var(--purple);
+  color: var(--bg-primary);
+}
+
+/* Code/Terminal blocks */
+.terminal-block {
+  background: var(--bg-terminal);
+  border: 1px solid var(--text-muted);
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+/* ASCII Box styling */
+.ascii-box {
+  border: 1px solid var(--text-muted);
+  position: relative;
+}
+
+.ascii-box::before {
+  content: '┌─';
+  position: absolute;
+  top: -0.6em;
+  left: 0.5rem;
+  background: var(--bg-primary);
+  padding: 0 0.25rem;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* Glitch effect class */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--pink);
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--cyan);
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(51px, 9999px, 28px, 0); }
+  10% { clip: rect(70px, 9999px, 63px, 0); }
+  20% { clip: rect(35px, 9999px, 98px, 0); }
+  30% { clip: rect(99px, 9999px, 3px, 0); }
+  40% { clip: rect(46px, 9999px, 74px, 0); }
+  50% { clip: rect(83px, 9999px, 38px, 0); }
+  60% { clip: rect(22px, 9999px, 8px, 0); }
+  70% { clip: rect(65px, 9999px, 91px, 0); }
+  80% { clip: rect(13px, 9999px, 55px, 0); }
+  90% { clip: rect(78px, 9999px, 19px, 0); }
+  100% { clip: rect(43px, 9999px, 67px, 0); }
+}
+
+/* Typing cursor */
+.typing-cursor::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: var(--green);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple);
 }
 
 /* Reduced motion */
@@ -70,5 +282,10 @@ button {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  body::before,
+  body::after {
+    display: none;
   }
 }

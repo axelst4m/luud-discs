@@ -1,17 +1,87 @@
+/* Terminal-style Packshot */
 .packshot-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    gap: 120px;
-    align-self: stretch;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(2rem, 8vw, 6rem);
+  flex-wrap: wrap;
+  position: relative;
 }
 
-.packshot1 {
-    width: 370px;
-}
-
+.packshot1,
 .packshot2 {
-    width: 370px;
+  width: clamp(280px, 30vw, 370px);
+  border: 1px solid var(--text-muted);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+/* Glowing border effect on hover */
+.packshot1:hover,
+.packshot2:hover {
+  border-color: var(--purple);
+  box-shadow:
+    0 0 20px rgba(189, 147, 249, 0.3),
+    0 0 40px rgba(189, 147, 249, 0.1),
+    inset 0 0 20px rgba(189, 147, 249, 0.05);
+}
+
+/* Subtle rotation on hover */
+.packshot1:hover {
+  transform: perspective(1000px) rotateY(-3deg);
+}
+
+.packshot2:hover {
+  transform: perspective(1000px) rotateY(3deg);
+}
+
+/* Corner accents */
+.packshot-container::before,
+.packshot-container::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: var(--cyan);
+  border-style: solid;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.packshot-container::before {
+  top: -10px;
+  left: calc(50% - 250px);
+  border-width: 2px 0 0 2px;
+}
+
+.packshot-container::after {
+  bottom: -10px;
+  right: calc(50% - 250px);
+  border-width: 0 2px 2px 0;
+}
+
+@media (max-width: 900px) {
+  .packshot-container::before,
+  .packshot-container::after {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .packshot1,
+  .packshot2 {
+    width: clamp(220px, 60vw, 300px);
+  }
+}
+
+@media (max-width: 480px) {
+  .packshot-container {
+    gap: 1.5rem;
+  }
+
+  .packshot1,
+  .packshot2 {
+    width: 100%;
+    max-width: 280px;
+  }
 }

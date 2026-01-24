@@ -1,56 +1,112 @@
+/* Terminal-style button */
 .button-buy {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  min-width: 200px;
-  background: #fff;
-  color: #000;
-  border: none;
-  border-radius: 6px;
+  gap: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  min-width: 220px;
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--green);
+  font-family: var(--font-mono);
   font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Glow effect */
+.button-buy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+/* Corner decorations */
+.button-buy::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background:
+    linear-gradient(to right, var(--cyan) 8px, transparent 8px) 0 0,
+    linear-gradient(to left, var(--cyan) 8px, transparent 8px) 100% 0,
+    linear-gradient(to right, var(--cyan) 8px, transparent 8px) 0 100%,
+    linear-gradient(to left, var(--cyan) 8px, transparent 8px) 100% 100%,
+    linear-gradient(to bottom, var(--cyan) 8px, transparent 8px) 0 0,
+    linear-gradient(to top, var(--cyan) 8px, transparent 8px) 0 100%,
+    linear-gradient(to bottom, var(--cyan) 8px, transparent 8px) 100% 0,
+    linear-gradient(to top, var(--cyan) 8px, transparent 8px) 100% 100%;
+  background-size: 8px 8px;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .button-buy:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
-  background: #f0f0f0;
+  color: var(--bg-primary);
+  text-shadow: none;
+  box-shadow: var(--glow-green), inset 0 0 20px rgba(80, 250, 123, 0.1);
+}
+
+.button-buy:hover::before {
+  opacity: 1;
+}
+
+.button-buy:hover::after {
+  opacity: 1;
 }
 
 .button-buy:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 3px;
+  outline: 1px solid var(--cyan);
+  outline-offset: 4px;
 }
 
 .button-buy:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
 .button-text {
-  font-style: italic;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.button-text::before {
+  content: '> ';
+  color: var(--cyan);
+}
+
+.button-buy:hover .button-text::before {
+  color: var(--bg-primary);
 }
 
 .button-icon {
   flex-shrink: 0;
-  opacity: 0.7;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 
 .button-buy:hover .button-icon {
   opacity: 1;
   transform: translate(2px, -2px);
+  color: var(--bg-primary);
 }
 
 /* Responsive */
 @media (max-width: 480px) {
   .button-buy {
-    min-width: 180px;
-    padding: 0.625rem 1.25rem;
+    min-width: 200px;
+    padding: 0.75rem 1.25rem;
     font-size: 0.8125rem;
   }
 }

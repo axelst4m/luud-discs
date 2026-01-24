@@ -1,73 +1,146 @@
+/* Terminal-style Release Card */
 .release-card {
   display: flex;
   width: 100%;
-  max-width: 280px;
+  max-width: 300px;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  align-items: stretch;
+  background: var(--bg-terminal);
+  border: 1px solid var(--text-muted);
+  position: relative;
+  padding: 1rem;
+  transition: all 0.3s ease;
 }
 
+/* Corner brackets */
+.release-card::before,
+.release-card::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--cyan);
+  border-style: solid;
+  transition: all 0.3s ease;
+}
+
+.release-card::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.release-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+.release-card:hover {
+  border-color: var(--purple);
+  box-shadow: 0 0 20px rgba(189, 147, 249, 0.2);
+}
+
+.release-card:hover::before,
+.release-card:hover::after {
+  border-color: var(--pink);
+  width: 20px;
+  height: 20px;
+}
+
+/* Header with terminal prompt style */
 .release-header {
-  text-align: center;
+  text-align: left;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--text-muted);
 }
 
 .catalog-number {
-  display: block;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.75rem;
+  display: inline-block;
+  font-family: var(--font-mono);
+  color: var(--orange);
+  font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  background: rgba(255, 184, 108, 0.1);
+  border: 1px solid var(--orange);
+  margin-bottom: 0.5rem;
 }
 
 .release-title {
-  color: #fff;
-  font-size: 0.9375rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
   line-height: 1.4;
   margin: 0;
 }
 
+.release-title::before {
+  content: '# ';
+  color: var(--purple);
+}
+
+/* Cover button */
 .release-cover-btn {
   position: relative;
   background: none;
-  border: none;
+  border: 1px solid var(--text-muted);
   padding: 0;
   cursor: pointer;
-  border-radius: 4px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s ease;
+  margin: 0.5rem 0;
 }
 
 .release-cover-btn:hover,
 .release-cover-btn:focus-visible {
-  transform: scale(1.03);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
 }
 
 .release-cover-btn:focus-visible {
-  outline: 2px solid #fff;
+  outline: 1px solid var(--pink);
   outline-offset: 3px;
 }
 
 .release-cover {
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
   object-fit: cover;
+  filter: saturate(0.9);
+  transition: filter 0.3s ease;
+}
+
+.release-cover-btn:hover .release-cover {
+  filter: saturate(1.1);
 }
 
 .cover-overlay {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.6);
+  gap: 0.5rem;
+  background: rgba(13, 13, 13, 0.85);
   opacity: 0;
-  transition: opacity 0.2s ease;
-  color: #fff;
+  transition: opacity 0.3s ease;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.cover-overlay::before {
+  content: '[ OPEN ]';
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
 }
 
 .release-cover-btn:hover .cover-overlay,
@@ -75,36 +148,93 @@
   opacity: 1;
 }
 
+/* Tracklist */
 .tracklist {
   list-style: none;
-  padding: 0;
+  padding: 0.75rem 0 0 0;
   margin: 0;
-  text-align: center;
+  text-align: left;
+  border-top: 1px dashed var(--text-muted);
+  font-family: var(--font-mono);
 }
 
 .track {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  line-height: 1.6;
+  font-size: 0.7rem;
+  line-height: 1.8;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.track::before {
+  content: '├─';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.track:last-child::before {
+  content: '└─';
+}
+
+/* Track link styles */
+.track-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.track-link:hover,
+.track-link:focus-visible {
+  color: var(--red);
+  text-shadow: 0 0 8px rgba(255, 85, 85, 0.4);
+}
+
+.track-link:focus-visible {
+  outline: 1px solid var(--red);
+  outline-offset: 2px;
+}
+
+.track-name {
+  color: inherit;
+}
+
+.youtube-icon {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.2s ease;
+  color: var(--red);
+}
+
+.track-link:hover .youtube-icon,
+.track-link:focus-visible .youtube-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Non-linked tracks */
+.track > .track-name {
+  color: var(--text-secondary);
+}
+
+.track:hover > .track-name {
+  color: var(--yellow);
 }
 
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .release-card {
     max-width: 100%;
-  }
-
-  .release-cover {
-    width: 180px;
-    height: 180px;
+    padding: 0.875rem;
   }
 
   .release-title {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
   }
 
   .track {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
   }
 }

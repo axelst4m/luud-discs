@@ -4,14 +4,14 @@ import "./ReleaseCard.css";
 const ReleaseCard = ({ release }) => {
   const { catalogNumber, title, cover, url, tracklist, id } = release;
 
-  const handleClick = () => {
+  const handleCoverClick = () => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  const handleKeyDown = (e) => {
+  const handleCoverKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      handleClick();
+      handleCoverClick();
     }
   };
 
@@ -24,8 +24,8 @@ const ReleaseCard = ({ release }) => {
 
       <button
         className="release-cover-btn"
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
+        onClick={handleCoverClick}
+        onKeyDown={handleCoverKeyDown}
         aria-label={`View ${title} on external site`}
         type="button"
       >
@@ -35,30 +35,36 @@ const ReleaseCard = ({ release }) => {
           className="release-cover"
           loading="lazy"
         />
-        <span className="cover-overlay">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            <polyline points="15 3 21 3 21 9" />
-            <line x1="10" y1="14" x2="21" y2="3" />
-          </svg>
-        </span>
+        <span className="cover-overlay" aria-hidden="true" />
       </button>
 
       <ul className="tracklist" aria-label={`Tracklist for ${title}`}>
         {tracklist.map((track, index) => (
           <li key={`${id}-track-${index}`} className="track">
-            {track}
+            {track.youtubeId ? (
+              <a
+                href={`https://www.youtube.com/watch?v=${track.youtubeId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="track-link"
+                aria-label={`Watch ${track.name} on YouTube`}
+              >
+                <span className="track-name">{track.name}</span>
+                <svg
+                  className="youtube-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                </svg>
+              </a>
+            ) : (
+              <span className="track-name">{track.name}</span>
+            )}
           </li>
         ))}
       </ul>
@@ -73,7 +79,12 @@ ReleaseCard.propTypes = {
     title: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    tracklist: PropTypes.arrayOf(PropTypes.string).isRequired,
+    tracklist: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        youtubeId: PropTypes.string,
+      })
+    ).isRequired,
   }).isRequired,
 };
 

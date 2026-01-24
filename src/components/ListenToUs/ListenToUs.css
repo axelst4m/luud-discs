@@ -1,11 +1,12 @@
+/* Terminal-style Releases Grid */
 .listen-to-us {
   width: 100%;
 }
 
 .releases-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 3rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem 1.5rem;
   justify-items: center;
   max-width: 1200px;
   margin: 0 auto;
@@ -26,16 +27,16 @@
 /* Tablet breakpoint */
 @media (max-width: 1024px) {
   .releases-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2.5rem 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.75rem 1.25rem;
   }
 }
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
   .releases-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem 1rem;
   }
 }
 
@@ -43,6 +44,6 @@
 @media (max-width: 480px) {
   .releases-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
 }
