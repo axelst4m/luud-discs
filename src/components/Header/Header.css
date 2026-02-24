@@ -6,25 +6,27 @@
 }
 
 .logo {
-  width: 280px;
+  width: 160px;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 20px rgba(189, 147, 249, 0.3));
-  transition: filter 0.3s ease;
+  opacity: 0.85;
+  filter: grayscale(0.2) drop-shadow(0 0 15px rgba(139, 233, 253, 0.3));
+  transition: all 0.3s ease;
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 30px rgba(189, 147, 249, 0.5))
-         drop-shadow(0 0 60px rgba(139, 233, 253, 0.2));
+  opacity: 1;
+  filter: grayscale(0) drop-shadow(0 0 25px rgba(139, 233, 253, 0.5))
+         drop-shadow(0 0 50px rgba(189, 147, 249, 0.2));
 }
 
 @media (max-width: 768px) {
   .logo {
-    width: 220px;
+    width: 130px;
   }
 }
 
 @media (max-width: 480px) {
   .logo {
-    width: 180px;
+    width: 110px;
   }
 }

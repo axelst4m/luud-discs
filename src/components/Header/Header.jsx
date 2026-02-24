@@ -1,5 +1,5 @@
 
-import logo from '../../assets/logo-header.webp';
+import logo from '../../assets/logo-luud.webp';
 import './Header.css';
 
 const Header = () => {
