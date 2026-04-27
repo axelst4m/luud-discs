@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { PLATFORMS } from '../../../lib/platforms.js';
 import { fmtDuration } from '../../../lib/format.js';
+import { useQueue } from '../../../hooks/useQueue.js';
 import './Row.css';
 
 /**
@@ -11,8 +12,13 @@ import './Row.css';
  *  - `mark`:  current mark state for that track (`{ starred?, heard? }`)
  *  - `onToggleStar`, `onToggleHeard`: callbacks fired on the buttons
  *  - `showFolder`: when true, displays the folder path on its own line below
+ *
+ * The Q button is wired straight to the queue store so the row can stay
+ * thin: no callback to thread from the parent for that one.
  */
 const Row = ({ track, mark, onToggleStar, onToggleHeard, showFolder }) => {
+  const queue = useQueue();
+  const inQueue = queue.isQueued(track.filename);
   const klass = [
     'slsk-row',
     mark?.starred ? 'slsk-row--starred' : '',
@@ -40,6 +46,22 @@ const Row = ({ track, mark, onToggleStar, onToggleHeard, showFolder }) => {
         ))}
       </div>
       <div className="slsk-row__marks">
+        <button
+          type="button"
+          className={`slsk-row__mark slsk-row__mark--queue${inQueue ? ' slsk-row__mark--active' : ''}`}
+          onClick={() => {
+            if (inQueue) queue.remove(track.filename);
+            else queue.enqueue({
+              filename:    track.filename,
+              title:       track.title,
+              format:      track.format,
+              durationSec: track.durationSec,
+            });
+          }}
+          title={inQueue ? 'Remove from preview queue' : 'Add to preview queue'}
+        >
+          {inQueue ? 'IN Q' : '+ Q'}
+        </button>
         <button
           type="button"
           className={`slsk-row__mark slsk-row__mark--star${mark?.starred ? ' slsk-row__mark--active' : ''}`}

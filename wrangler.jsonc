@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "luud-discs",
+  "main": "worker/index.js",
   "compatibility_date": "2026-04-27",
   "compatibility_flags": ["nodejs_compat"],
   "observability": {
@@ -9,6 +10,8 @@
   "assets": {
     // Folder produced by `npm run build` (Vite default).
     "directory": "./dist",
+    // Binding name used inside the Worker (env.ASSETS.fetch(request)).
+    "binding": "ASSETS",
     // SPA fallback: any unknown URL serves /index.html with status 200,
     // so React Router can take over client-side routing.
     "not_found_handling": "single-page-application"

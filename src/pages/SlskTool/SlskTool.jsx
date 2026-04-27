@@ -10,6 +10,7 @@ import ResultsFlat     from '../../components/SlskTool/ResultsFlat/ResultsFlat';
 import ResultsTree     from '../../components/SlskTool/ResultsTree/ResultsTree';
 import StarredFooter   from '../../components/SlskTool/StarredFooter/StarredFooter';
 import HelpModal       from '../../components/SlskTool/HelpModal/HelpModal';
+import Player          from '../../components/SlskTool/Player/Player';
 
 import { useMarks }    from '../../hooks/useMarks.js';
 import { cleanOne, cleanTitles, buildLinks } from '../../lib/cleaner.js';
@@ -270,6 +271,7 @@ const SlskTool = () => {
       </section>
 
       <StarredFooter resolve={resolveStarred} />
+      <Player />
       <HelpModal isOpen={helpOpen} onClose={() => setHelpOpen(false)} />
     </main>
   );
