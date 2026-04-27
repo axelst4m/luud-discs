@@ -38,10 +38,39 @@ const SlskTool = () => {
   const { getMark, toggleStar, toggleHeard } = useMarks();
 
   // ----- effects -----
+
+  // Title + Open Graph meta tags. Restored on unmount so other pages
+  // keep the site-wide values declared in index.html.
   useEffect(() => {
-    const previous = document.title;
-    document.title = 'SLSK-TOOL // Lüüd Discs';
-    return () => { document.title = previous; };
+    const tags = {
+      title:                'SLSK-TOOL // Lüüd Discs',
+      description:          'On-device tool for Soulseek and Nicotine+ users: turn a shared folder listing into a searchable list of tracks with preview links to YouTube, SoundCloud, Bandcamp and Discogs.',
+      url:                  'https://luud-discs.fr/slsk-tool',
+    };
+    const previous = setMetaTags(tags);
+    return () => restoreMetaTags(previous);
+  }, []);
+
+  // Global keyboard shortcuts. "/" focuses the search input (when one
+  // is on screen), "?" opens the help modal. We don't intercept inside
+  // text inputs so the shortcuts feel natural.
+  useEffect(() => {
+    const handler = (e) => {
+      const target = e.target;
+      const inField = target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable;
+      if (e.key === '/' && !inField) {
+        const search = document.querySelector('.slsk-filter-search');
+        if (search) {
+          e.preventDefault();
+          search.focus();
+        }
+      } else if (e.key === '?' && !inField) {
+        e.preventDefault();
+        setHelpOpen(true);
+      }
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
   }, []);
 
   useEffect(() => { try { localStorage.setItem(MODE_KEY, mode); }    catch { /* swallow */ } }, [mode]);
@@ -271,6 +300,42 @@ function readFilter() {
     }
   } catch { /* swallow */ }
   return { query: '', formats: [], state: 'all' };
+}
+
+// ---------------------------------------------------------------------------
+// Open Graph / SEO meta tags helpers
+// ---------------------------------------------------------------------------
+
+const META_KEYS = [
+  { selector: 'meta[property="og:title"]',       attr: 'content', from: 'title'       },
+  { selector: 'meta[property="og:description"]', attr: 'content', from: 'description' },
+  { selector: 'meta[property="og:url"]',         attr: 'content', from: 'url'         },
+  { selector: 'meta[name="twitter:title"]',      attr: 'content', from: 'title'       },
+  { selector: 'meta[name="twitter:description"]', attr: 'content', from: 'description' },
+  { selector: 'meta[name="twitter:url"]',        attr: 'content', from: 'url'         },
+  { selector: 'meta[name="description"]',        attr: 'content', from: 'description' },
+];
+
+function setMetaTags(values) {
+  const previous = { title: document.title };
+  document.title = values.title;
+  for (const m of META_KEYS) {
+    const el = document.querySelector(m.selector);
+    if (!el) continue;
+    previous[m.selector] = el.getAttribute(m.attr);
+    el.setAttribute(m.attr, values[m.from]);
+  }
+  return previous;
+}
+
+function restoreMetaTags(previous) {
+  if (previous.title) document.title = previous.title;
+  for (const m of META_KEYS) {
+    const el = document.querySelector(m.selector);
+    if (!el || !(m.selector in previous)) continue;
+    if (previous[m.selector] === null) el.removeAttribute(m.attr);
+    else el.setAttribute(m.attr, previous[m.selector]);
+  }
 }
 
 export default SlskTool;
