@@ -2,7 +2,45 @@
 .main-header {
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
+  width: 100%;
+}
+
+.header-tool-link {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  color: var(--cyan);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.header-tool-link:hover,
+.header-tool-link:focus-visible {
+  color: var(--pink);
+  border-color: var(--pink);
+  background: rgba(255, 121, 198, 0.06);
+  text-shadow: var(--glow-pink);
+}
+
+@media (max-width: 768px) {
+  .header-tool-link {
+    position: static;
+    transform: none;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .main-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
 .logo {

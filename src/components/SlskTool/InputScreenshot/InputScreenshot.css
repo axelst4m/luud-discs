@@ -1,0 +1,127 @@
+.slsk-shot {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.slsk-shot__side {
+  flex-shrink: 0;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slsk-shot__main {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slsk-shot__preview {
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  border: 1px solid var(--text-muted);
+  background: var(--bg-primary);
+  display: block;
+}
+.slsk-shot__preview--error { border-color: var(--red); }
+
+.slsk-shot__filename {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+
+.slsk-shot__reset {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--text-muted);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.slsk-shot__reset:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+.slsk-shot__status {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 12px;
+  color: var(--cyan);
+  letter-spacing: 0.03em;
+  font-family: var(--font-mono);
+  text-shadow: var(--glow-cyan);
+}
+.slsk-shot__status-label::before {
+  content: "$ ";
+  color: var(--green);
+}
+
+.slsk-shot__progress {
+  width: 100%;
+  height: 4px;
+  background: var(--bg-primary);
+  border: 1px solid var(--text-muted);
+  overflow: hidden;
+}
+.slsk-shot__progress-bar {
+  height: 100%;
+  background: var(--cyan);
+  box-shadow: var(--glow-cyan);
+  transition: width 0.2s ease;
+}
+
+.slsk-shot__note {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1.5;
+  font-family: var(--font-mono);
+}
+
+.slsk-shot__review-label {
+  margin: 0;
+  color: var(--green);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  font-family: var(--font-mono);
+}
+.slsk-shot__review-label::before {
+  content: "> ";
+  color: var(--cyan);
+}
+
+.slsk-shot__textarea {
+  flex: 1;
+  min-height: 200px;
+}
+
+.slsk-shot--error {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+}
+.slsk-shot--error .slsk-shot__preview--error {
+  max-width: 240px;
+}
+
+@media (max-width: 600px) {
+  .slsk-shot__side { width: 100%; }
+  .slsk-shot__preview { max-height: 180px; }
+}

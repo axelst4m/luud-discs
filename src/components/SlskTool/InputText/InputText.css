@@ -1,0 +1,57 @@
+.slsk-input-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.slsk-input-text__area {
+  width: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--text-muted);
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  resize: vertical;
+  min-height: 180px;
+}
+
+.slsk-input-text__area:focus {
+  outline: none;
+  border-color: var(--pink);
+  box-shadow: var(--glow-pink);
+}
+
+.slsk-input-text__area::placeholder {
+  color: var(--text-muted);
+}
+
+/* Shared "magic" button used in TEXT and SCREENSHOT review */
+.slsk-btn-magic {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--green);
+  padding: 10px 28px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slsk-btn-magic::before {
+  content: "> ";
+  color: var(--cyan);
+}
+
+.slsk-btn-magic:hover {
+  background: var(--green);
+  color: var(--bg-primary);
+  box-shadow: var(--glow-green);
+}
+
+.slsk-btn-magic:hover::before {
+  color: var(--bg-primary);
+}

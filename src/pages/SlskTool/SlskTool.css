@@ -1,0 +1,212 @@
+/* ============================================================
+   SLSK-TOOL page styles
+   Inherits CSS variables and CRT effects from src/index.css.
+   All classes prefixed `slsk-tool__` (or `slsk-*` for shared bits)
+   to avoid clashing with the rest of the site.
+   ============================================================ */
+
+.slsk-tool {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1rem, 4vw, 2.5rem);
+  padding-bottom: 320px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ---- Page header ---- */
+
+.slsk-tool__header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 0.5rem 0 1rem;
+  border-bottom: 1px dashed var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.slsk-tool__back {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+.slsk-tool__back:hover,
+.slsk-tool__back:focus-visible {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: rgba(139, 233, 253, 0.06);
+}
+
+.slsk-tool__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 600;
+  color: var(--pink);
+  letter-spacing: 0.1em;
+  text-shadow: var(--glow-pink);
+  position: relative;
+}
+.slsk-tool__title::before {
+  content: "> ";
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  animation: blink 1s step-end infinite;
+}
+
+.slsk-tool__version {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.slsk-tool__help {
+  margin-left: auto;
+  background: transparent;
+  font-family: var(--font-mono);
+  color: var(--cyan);
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.slsk-tool__help:hover,
+.slsk-tool__help:focus-visible {
+  color: var(--pink);
+  border-color: var(--pink);
+  background: rgba(255, 121, 198, 0.06);
+  text-shadow: var(--glow-pink);
+}
+
+/* ---- Sections (input + results) ---- */
+
+.slsk-tool__section {
+  background: var(--bg-terminal);
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+/* ASCII box decoration scoped to the tool to avoid stomping the
+   site-level .ascii-box used by other components. */
+.slsk-ascii-box {
+  position: relative;
+  border: 1px solid var(--text-muted);
+}
+.slsk-ascii-box::before {
+  content: "┌── " attr(data-label) " ──┐";
+  position: absolute;
+  top: -0.7em;
+  left: 1rem;
+  background: var(--bg-primary);
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  letter-spacing: 0.05em;
+}
+
+.slsk-tool__input-zone { min-height: 80px; }
+
+/* ---- Results header (summary + filter bar + layout toggle) ---- */
+
+.slsk-tool__results-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--text-muted);
+}
+
+.slsk-tool__results-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.slsk-tool__summary {
+  color: var(--cyan);
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  flex: 1;
+  min-width: 250px;
+  text-shadow: var(--glow-cyan);
+  font-family: var(--font-mono);
+}
+.slsk-tool__summary::before {
+  content: "$ ";
+  color: var(--green);
+}
+
+.slsk-layout-toggle {
+  display: inline-flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.slsk-layout-toggle__btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--text-muted);
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.slsk-layout-toggle__btn:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+.slsk-layout-toggle__btn--active {
+  color: var(--pink);
+  border-color: var(--pink);
+  background: rgba(255, 121, 198, 0.08);
+}
+
+/* ---- Shared status text ---- */
+
+.slsk-placeholder {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.slsk-error {
+  color: var(--red);
+  font-family: var(--font-mono);
+  padding: 8px 12px;
+  border-left: 2px solid var(--red);
+  margin: 0 0 12px;
+  font-size: 12px;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 768px) {
+  .slsk-tool {
+    padding: 1rem;
+    padding-bottom: 320px;
+    gap: 1.25rem;
+  }
+  .slsk-tool__header { gap: 8px; }
+  .slsk-tool__help   { margin-left: 0; }
+  .slsk-tool__section { padding: 1rem 0.75rem 1.25rem; }
+}

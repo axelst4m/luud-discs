@@ -1,0 +1,14 @@
+# Cloudflare Pages cache rules
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# All hashed Vite build assets are immutable. Lock them in for a year.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML must always be revalidated so users pick up new builds quickly.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Manifest and friendly icons can be cached briefly.
+/manifest.json
+  Cache-Control: public, max-age=3600
