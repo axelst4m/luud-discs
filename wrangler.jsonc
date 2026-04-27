@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "luud-discs",
+  "compatibility_date": "2026-04-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    // SPA fallback: any unknown URL serves /index.html with status 200,
+    // so React Router can take over client-side routing.
+    "not_found_handling": "single-page-application"
+  }
+}

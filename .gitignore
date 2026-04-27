@@ -25,3 +25,7 @@ dist-ssr
 
 # Vite temp files
 *.timestamp-*
+
+# Wrangler local cache (Cloudflare Workers/Pages CLI)
+.wrangler
+
