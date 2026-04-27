@@ -7,6 +7,8 @@
     "enabled": true
   },
   "assets": {
+    // Folder produced by `npm run build` (Vite default).
+    "directory": "./dist",
     // SPA fallback: any unknown URL serves /index.html with status 200,
     // so React Router can take over client-side routing.
     "not_found_handling": "single-page-application"
