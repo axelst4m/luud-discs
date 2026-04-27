@@ -116,23 +116,26 @@ const EN = `
     <li><strong>NICOTINE+ JSON</strong> : the most accurate source. Nicotine+ saves fetched user shares as a file with no extension. On macOS, the path is <code>/Users/&lt;your-user&gt;/.local/share/nicotine/usershares/</code>. Add <code>.json</code> to the filename, then drop the file here.</li>
   </ul>
 
-  <h3>2. Preview and mark</h3>
-  <p>Each row carries four search links (<code>YT</code>, <code>SC</code>, <code>BC</code>, <code>DG</code>) that open in a new tab for previewing the track.</p>
-  <p>Two independent flags are available:</p>
+  <h3>2. Preview and queue</h3>
+  <p>Each row has a <code>+ Q</code> button. Clicking it adds the track to the preview queue. The first track starts playing in an embedded YouTube player at the bottom of the page, and when it ends the queue advances to the next one automatically. <code>PREV</code> and <code>NEXT</code> in the player let you skip manually. The queue persists across sessions.</p>
+  <p>Each row also carries four search links (<code>YT</code>, <code>SC</code>, <code>BC</code>, <code>DG</code>) that open in a new tab. Useful when YouTube doesn't have the track and you'd rather check Bandcamp or Discogs directly.</p>
+
+  <h3>3. Marks</h3>
+  <p>Two independent flags on each row:</p>
   <ul>
     <li><strong>STAR</strong> : a track worth keeping an eye on, added to the footer shortlist.</li>
     <li><strong>HEARD</strong> : already previewed, can be skipped next time.</li>
   </ul>
   <p>Both flags are stored locally and persist across sessions.</p>
 
-  <h3>3. Filters</h3>
+  <h3>4. Filters</h3>
   <p>The free-text search matches titles and folder paths. The format checkboxes (MP3, FLAC, WAV, OTHER) narrow the list, and the state selector cycles between ALL, UNHEARD, STARRED and HEARD.</p>
 
-  <h3>4. FLAT and TREE (Nicotine+ only)</h3>
+  <h3>5. FLAT and TREE (Nicotine+ only)</h3>
   <p><strong>TREE</strong> is a folder browser, best for going through an album or a label.</p>
   <p><strong>FLAT</strong> is a single list of every track, best for searching across the whole share.</p>
 
-  <h3>5. Starred footer</h3>
+  <h3>6. Starred footer</h3>
   <p>Starring a track makes a dock slide up at the bottom of the page, holding the shortlist with the same four preview links for each entry.</p>
   <ul>
     <li><code>CP</code> copies a single filename to the clipboard.</li>
@@ -161,23 +164,26 @@ const FR = `
     <li><strong>NICOTINE+ JSON</strong> : la source la plus précise. Nicotine+ enregistre les biblios récupérées dans un fichier sans extension. Sur macOS, le chemin est <code>/Users/&lt;votre-user&gt;/.local/share/nicotine/usershares/</code>. Il suffit d'ajouter <code>.json</code> à la fin du nom du fichier, puis de le déposer ici.</li>
   </ul>
 
-  <h3>2. Pré-écoute et marquage</h3>
-  <p>Chaque ligne comporte quatre liens de recherche (<code>YT</code>, <code>SC</code>, <code>BC</code>, <code>DG</code>) qui s'ouvrent dans un nouvel onglet pour pré-écouter le morceau.</p>
-  <p>Deux marqueurs indépendants sont disponibles :</p>
+  <h3>2. Pré-écoute et queue</h3>
+  <p>Chaque ligne a un bouton <code>+ Q</code>. En cliquant, le morceau s'ajoute à la queue de pré-écoute. Le premier morceau démarre dans un player YouTube intégré en bas de page, et quand il se termine la queue passe automatiquement au suivant. <code>PREV</code> et <code>NEXT</code> dans le player permettent de naviguer manuellement. La queue persiste entre les sessions.</p>
+  <p>Chaque ligne porte aussi quatre liens de recherche (<code>YT</code>, <code>SC</code>, <code>BC</code>, <code>DG</code>) qui s'ouvrent dans un nouvel onglet. Utile quand le morceau n'est pas sur YouTube et qu'on préfère aller voir directement sur Bandcamp ou Discogs.</p>
+
+  <h3>3. Marqueurs</h3>
+  <p>Deux marqueurs indépendants sur chaque ligne :</p>
   <ul>
     <li><strong>STAR</strong> : morceau à garder à l'œil, ajouté à la shortlist en bas de page.</li>
     <li><strong>HEARD</strong> : déjà pré-écouté, à ignorer la prochaine fois.</li>
   </ul>
   <p>Les deux marqueurs sont stockés localement et persistent entre les sessions.</p>
 
-  <h3>3. Filtres</h3>
+  <h3>4. Filtres</h3>
   <p>La recherche texte cible les titres et les chemins de dossiers. Les cases formats (MP3, FLAC, WAV, OTHER) affinent la liste, et le sélecteur d'état bascule entre ALL, UNHEARD, STARRED et HEARD.</p>
 
-  <h3>4. FLAT et TREE (Nicotine+ uniquement)</h3>
+  <h3>5. FLAT et TREE (Nicotine+ uniquement)</h3>
   <p><strong>TREE</strong> : explorateur de dossiers, adapté pour parcourir un album ou un label.</p>
   <p><strong>FLAT</strong> : liste plate de tous les morceaux, adaptée pour chercher à travers toute la bibliothèque.</p>
 
-  <h3>5. Footer starred</h3>
+  <h3>6. Footer starred</h3>
   <p>Mettre un STAR fait apparaître un dock en bas de page, contenant la shortlist avec les mêmes quatre liens de pré-écoute pour chaque entrée.</p>
   <ul>
     <li><code>CP</code> copie un filename dans le presse-papier.</li>

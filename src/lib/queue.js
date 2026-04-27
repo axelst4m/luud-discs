@@ -36,13 +36,17 @@ let state = readFromStorage();
 const listeners = new Set();
 
 function readFromStorage() {
+  // We persist the queue items but never the currentIndex: at reload the
+  // player should be closed and let the user restart playback explicitly.
+  // Browsers block autoplay without a fresh user gesture anyway, so a
+  // resurrected player would just sit there blocked.
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return { items: [], currentIndex: -1 };
     const parsed = JSON.parse(raw);
     return {
       items: Array.isArray(parsed.items) ? parsed.items.filter(isValidTrack) : [],
-      currentIndex: typeof parsed.currentIndex === 'number' ? parsed.currentIndex : -1,
+      currentIndex: -1,
     };
   } catch {
     return { items: [], currentIndex: -1 };
@@ -51,7 +55,8 @@ function readFromStorage() {
 
 function writeToStorage() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    // Don't bother writing currentIndex; readFromStorage ignores it.
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ items: state.items }));
   } catch { /* swallow quota / privacy errors */ }
 }
 
