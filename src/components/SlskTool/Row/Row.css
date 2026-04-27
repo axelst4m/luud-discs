@@ -118,6 +118,12 @@
   border-color: var(--cyan);
   box-shadow: var(--glow-cyan);
 }
+.slsk-row__mark--queue.slsk-row__mark--active {
+  color: var(--bg-primary);
+  background: var(--pink);
+  border-color: var(--pink);
+  box-shadow: var(--glow-pink);
+}
 
 .slsk-row__folder {
   flex-basis: 100%;
