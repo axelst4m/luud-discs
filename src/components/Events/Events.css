@@ -154,15 +154,32 @@
 
 .event-status {
   font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.event-status--upcoming {
   color: var(--green);
   text-shadow: var(--glow-green);
-  letter-spacing: 0.1em;
   animation: pulse-status 2s ease-in-out infinite;
+}
+
+.event-status--past {
+  color: var(--orange);
+  text-shadow: 0 0 8px rgba(236, 144, 32, 0.35);
+  opacity: 0.85;
 }
 
 @keyframes pulse-status {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
+}
+
+/* Past events: subtle desaturation on the visuals so the eye picks the upcoming first */
+.event-card:has(.event-status--past) .event-image {
+  filter: saturate(0.55) contrast(1.05) brightness(0.92);
+}
+.event-card:has(.event-status--past):hover .event-image {
+  filter: saturate(0.75) contrast(1.1) brightness(0.95);
 }
 
 .event-date {
